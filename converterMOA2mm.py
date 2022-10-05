@@ -11,7 +11,7 @@ class Amo: # Amunition : balistic
             
     def save (self): # Saving the Amunition dataset  
         jsonFileName = self.vendor+self.calibre
-        if (os.path.exists (jsonFileName)) and (input (f"file {jsonFileName} esist. Would You like re-write it? (y/n): ") == 'y') or not (os.path.exists (jsonFileName)) :
+        if (os.path.exists (jsonFileName)) and (input (f"The file {jsonFileName} is exists. Would You like to re-write it? (y/n): ") == 'y') or (not (os.path.exists (jsonFileName))) :
             self.balistic = {}
             print (f"\n New Amo : {self.vendor}, {self.calibre} \n")
             index = 0
@@ -65,13 +65,13 @@ class Amo: # Amunition : balistic
 
         y = y1 + (x-x1)*((y2-y1)/(x2-x1)) # interpolate Deviation
         z = z1 + (x-x1)*((z2-z1)/(x2-x1)) # interpolate Velocity
-        return y
+        return [y,z]
 
 ## BODY
 #amo = Amo (input ("Plase give vendor name: "))
 amo = Amo ('sts','223')
 amo.save ()
-amo.show ()
 amo.load ()
-y = amo.get (float(input ("Pleae give Distance: ")))
-print (f"Correction should be:{int(y)}, [mm]")
+amo.show ()
+[y,z] = amo.get (float(input ("Please give desired Distance: ")))
+print (f"Correction should be:{int(y)}, [mm]. Velicity will be {int (z)}, [m/s]")
