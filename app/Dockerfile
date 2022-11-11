@@ -1,8 +1,7 @@
 FROM python:3.8
-WORKDIR /com.docker.devenvironments.code
-WORKDIR /com.docker.devenvironments.code/app
-WORKDIR /com.docker.devenvironments.code/app/src
+WORKDIR src/
 COPY requirements.txt .
+RUN apt-get update && apt --yes install python3
 RUN pip install -r requirements.txt
 COPY src/ .
 CMD ["python", "./converterMOA2mm.py"]
